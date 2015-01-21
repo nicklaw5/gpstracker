@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/auth/login', 'AuthController@create');
+Route::get('auth/login', 'AuthController@create');
+Route::get('auth/logout', 'AuthController@destroy');
+
 Route::resource('auth', 'AuthController');
 
 Route::group(array('before' => ['auth']), function() {

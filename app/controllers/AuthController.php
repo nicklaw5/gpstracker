@@ -35,25 +35,27 @@ class AuthController extends \BaseController {
 	 */
 	public function store()
 	{
-		// Mobile Login Request
-		if(Request::ajax())
-	    {
-			if(Auth::attempt(['username' => Input::get('username'),'password'=> Input::get('password')]))
-			{
-				return 'success';
-			}
+		if(Auth::attempt(['username' => Input::get('username'),'password'=> Input::get('password')]))
+		{	
+			// Successful Mobile Login
+			if(Request::ajax())
+    		{
+    			return 'success';
+    		}
 
-			return 'Invalid username or password.';
-	    }
-
-	    //Web Login Request
-	    if(Auth::attempt(['username' => Input::get('username'),'password'=> Input::get('password')]))
-		{
-			return Redirect::action('MapsController@index');
+    		// Successful Web Login
+    		return Redirect::action('MapsController@index');
 		}
 
+		// Unsuccessful Mobile Login
+		if(Request::ajax()) 
+		{
+			return 'Invalid username or password.';
+		}
+
+		// Unsuccessful Mobile Login
 		Session::flash('error', 'Invalid email address or password.');
-		return Redirect::back()->withInput();
+		return Redirect::back()->withInput();			
 	}
 
 
@@ -101,8 +103,14 @@ class AuthController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
-	}
+		Auth::logout();
 
+		if(Request::ajax())
+		{
+			return 'success';
+		}
+
+		return Redirect::route('auth.logout');
+	}
 
 }
