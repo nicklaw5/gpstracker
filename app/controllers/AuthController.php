@@ -110,7 +110,7 @@ class AuthController extends \BaseController {
 			return 'success';
 		}
 
-		return Redirect::route('auth.logout');
+		return Redirect::to('auth/logout');
 	}
 
 }
