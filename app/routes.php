@@ -16,8 +16,8 @@ Route::resource('auth', 'AuthController');
 
 Route::group(array('before' => ['auth']), function() {
 
-
-	Route::get('/', 'MapController@index');
+	Route::get('/', 'MapsController@index')
+	Route::resource('map', 'MapsController');
 
 
 });
