@@ -6,7 +6,7 @@
 <body>
 
 @if(Session::has('error'))
-	<p>{{ Session::get('error') }}</p>
+	<p style="color:red">{{ Session::get('error') }}</p>
 @endif
 
 {{ Form::open(['action' => 'AuthController@store']) }}

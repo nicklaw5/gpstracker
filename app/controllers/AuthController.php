@@ -35,27 +35,27 @@ class AuthController extends \BaseController {
 	 */
 	public function store()
 	{
-		if(Auth::attempt(['username' => Input::get('username'),'password'=> Input::get('password')]))
-		{	
-			// Successful Mobile Login
-			if(Request::ajax())
-    		{
-    			return 'success';
-    		}
+		// Mobile Login Request
+		if(Request::ajax())
+	    {
+			if(Auth::attempt(['username' => Input::get('username'),'password'=> Input::get('password')]))
+			{
 
-    		// Successful Web Login
-    		return Redirect::action('MapsController@index');
-		}
+				return 'success';
+			}
 
-		// Unsuccessful Mobile Login
-		if(Request::ajax()) 
-		{
 			return 'Invalid username or password.';
+	    }
+
+	    //Web Login Request
+	    if(Auth::attempt(['username' => Input::get('username'),'password'=> Input::get('password')]))
+		{
+			return 'success'; // Redirect::action('MapsController@index');
 		}
 
-		// Unsuccessful Mobile Login
-		Session::flash('error', 'Invalid email address or password.');
-		return Redirect::back()->withInput();			
+		return 'Invalid username or password.';
+		// Session::flash('error', 'Invalid email address or password.');
+		// return Redirect::back()->withInput();
 	}
 
 
@@ -101,7 +101,7 @@ class AuthController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy()
+	public function destroy($id)
 	{
 		Auth::logout();
 
@@ -110,7 +110,7 @@ class AuthController extends \BaseController {
 			return 'success';
 		}
 
-		return Redirect::to('auth/login');
+		return Redirect::route('auth.logout');
 	}
 
 }
