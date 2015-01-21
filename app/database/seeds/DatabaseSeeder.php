@@ -13,26 +13,25 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('UsersTableSeeder');
 	}
+}
 
-	class UsersTableSeeder extends Seeder {
+class UsersTableSeeder extends Seeder {
 
-	    public function run() {
+    public function run() {
 
-	    	$now = date('Y-m-d H:i:s');
+    	$now = date('Y-m-d H:i:s');
 
-	        $users = [	
-				[
-					'username' 			=>	'demo',
-		            'password'			=> 	Hash::make('demo'),
-		            'created_at'		=> 	$now,
-		            'updated_at'		=> 	$now
-		        ]
-		    ];
+        $users = [	
+			[
+				'username' 			=>	'demo',
+	            'password'			=> 	Hash::make('demo'),
+	            'created_at'		=> 	$now,
+	            'updated_at'		=> 	$now
+	        ]
+	    ];
 
-	        DB::table('users')->insert($users);
-	        
-	    }
-
-	}
+        DB::table('users')->insert($users);
+        
+    }
 
 }
