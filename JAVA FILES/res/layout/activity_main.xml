@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+    
+    <fragment
+    class="com.google.android.gms.maps.MapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/btnReady"
+    android:id="@+id/map" />
+
+    <Button
+        android:id="@+id/btnDelivering"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/map"
+        android:layout_toRightOf="@+id/btnReady"
+        android:onClick="onClick_Delivering"
+        android:text="Delivering" />
+
+    <Button
+        android:id="@+id/btnReturning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/map"
+        android:layout_toRightOf="@+id/btnDelivering"
+        android:onClick="onClick_Returning"
+        android:text="Returning" />
+
+    <Button
+        android:id="@+id/btnReady"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:onClick="onClick_Ready"
+        android:text="Ready" />
+    
+</RelativeLayout>
